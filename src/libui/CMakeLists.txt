@@ -1,0 +1,89 @@
+#PLAYER_DIR = ../components/player
+#INCLUDEPATH += $$LIBUI_DIR
+#INCLUDEPATH += $$PLAYER_DIR
+#
+#unix {
+#    LIBS += -L$$LIBUI_DIR -ltupigui
+#}
+#
+#win32 {
+#    LIBS += -L$$LIBUI_DIR/release/ -ltupigui
+#}
+#
+#linux-g++ {
+#    PRE_TARGETDEPS += $$LIBUI_DIR/libtupigui.so
+#}
+#
+
+#QT += opengl core gui svg xml network
+#TEMPLATE = lib
+#TARGET = tupigui
+#
+#macx {
+#    CONFIG += plugin warn_on
+#} else {
+#    CONFIG += dll warn_on
+#}
+#
+#unix {
+#    !include(../../tupiglobal.pri) {
+#        error("Please configure first")
+#    }
+#}
+#
+#win32 {
+#    include(../../quazip.win.pri)
+#    include(../../win.pri)
+#}
+#
+#INSTALLS += images images-en 
+#images-en.files += images/en/*.png 
+#images-en.path = /data/en/images 
+#images.files += images/es/*.png 
+#images.path = /data/es/images/ 
+#
+#INSTALLS += target
+#target.path = /lib/
+#
+#contains("DEFINES", "ADD_HEADERS") {
+#    INSTALLS += headers
+#    headers.target = .
+#    headers.commands = cp *.h $(INSTALL_ROOT)/include/tupigui
+#    headers.path = /include/tupigui
+#}
+#
+#HEADERS += tupabout.h \
+#           tupthemepreferences.h \
+#           tuppaintareapreferences.h \
+#           tupgeneralpreferences.h \
+#           tuppreferencesdialog.h
+# 
+#SOURCES += tupabout.cpp \
+#           tupthemepreferences.cpp \
+#           tuppaintareapreferences.cpp \
+#           tupgeneralpreferences.cpp \
+#           tuppreferencesdialog.cpp 
+
+set(TUPIGUI_SOURCES
+    tupabout.cpp
+    tupthemepreferences.cpp
+    tuppaintareapreferences.cpp
+    tupgeneralpreferences.cpp
+    tuppreferencesdialog.cpp)
+
+add_library(tupigui SHARED ${TUPIGUI_SOURCES})
+set_target_properties(tupigui PROPERTIES VERSION ${LIB_VERSION_STRING}
+                      SOVERSION ${LIB_VERSION_MAJOR}
+                      INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(tupigui tupifwcore tupifwgui tupibase Qt::Network)
+
+#
+#STORE_DIR = ../store
+#LIBBASE_DIR = ../libbase
+#LIBTUPI_DIR = ../libtupi
+#
+#FRAMEWORK_DIR = "../framework"
+#include($$FRAMEWORK_DIR/framework.pri)
+#include($$STORE_DIR/store.pri)
+#include($$LIBBASE_DIR/libbase.pri)
+#include($$LIBTUPI_DIR/libtupi.pri)

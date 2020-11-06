@@ -1,0 +1,14 @@
+#add_subdirectory(themes)
+add_subdirectory(framework)
+add_subdirectory(libtupi)
+add_subdirectory(store)
+add_subdirectory(libbase)
+add_subdirectory(libcolor)
+add_subdirectory(mypaint)
+add_subdirectory(net)
+add_subdirectory(libui)
+add_subdirectory(components)
+add_subdirectory(plugins)
+add_subdirectory(shell)
+
+#CONFIG += ordered warn_on

@@ -1,0 +1,47 @@
+#QT += opengl core gui svg xml network
+#CONFIG += plugin warn_on
+#TEMPLATE = lib
+#TARGET = tupipapagayotool
+#
+#unix {
+#    !include(../../../../tupiglobal.pri){
+#        error("Please run configure first")
+#    }
+#}
+#
+#win32 {
+#    include(../../../../win.pri)
+#}
+#
+#INSTALLS += target 
+#target.path = /plugins/
+#
+#HEADERS += mouthtarget.h \
+#           papagayosettings.h \
+#           buttonspanel.h \
+#           configurator.h \
+#           lipsyncmanager.h \
+#           papagayotool.h 
+#
+
+set(TUPIPAPAGAYOTOOL_SOURCES
+###    mouthtarget.cpp
+    papagayosettings.cpp
+    buttonspanel.cpp
+    configurator.cpp
+    lipsyncmanager.cpp
+    papagayotool.cpp)
+
+add_library(tupipapagayotool MODULE ${TUPIPAPAGAYOTOOL_SOURCES})
+target_link_libraries(tupipapagayotool tupifwcore tupifwgui tupibase)
+
+#FRAMEWORK_DIR = "../../../framework"
+#include($$FRAMEWORK_DIR/framework.pri)
+#
+#LIBBASE_DIR = ../../../libbase
+#STORE_DIR = ../../../store
+#LIBTUPI_DIR = ../../../libtupi
+#
+#include($$LIBBASE_DIR/libbase.pri)	
+#include($$STORE_DIR/store.pri)
+#include($$LIBTUPI_DIR/libtupi.pri)
