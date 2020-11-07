@@ -38,6 +38,7 @@
 #include "tapplicationproperties.h" 
 
 #include <QDesktopWidget>
+#include <QPainterPath>
 
 TSlider::TSlider(Qt::Orientation orientation, TSlider::Mode mode, const QColor &start, const QColor &end, QWidget *parent) : QGraphicsView(parent)
 {

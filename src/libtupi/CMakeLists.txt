@@ -65,7 +65,7 @@
 
 set(TUPI_SOURCES
     tupgraphicalgorithm.cpp
-    ###tuppaintareaproperties.cpp
+    tuppaintareaproperties.cpp
     tupgradientcreator.cpp
     tupgradientselector.cpp
     tupgradientviewer.cpp
@@ -82,8 +82,8 @@ set(TUPI_SOURCES
     tuppenthicknesswidget.cpp
     tupbrushstatus.cpp
     tuptoolstatus.cpp
-    tupcolorwidget.cpp)
-    ###tuppaintareastatus.cpp)
+    tupcolorwidget.cpp
+    tuppaintareastatus.cpp)
 
 add_library(tupi SHARED ${TUPI_SOURCES})
 set_target_properties(tupi PROPERTIES VERSION ${LIB_VERSION_STRING}

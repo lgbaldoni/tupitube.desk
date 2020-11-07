@@ -36,6 +36,12 @@
 #include "tglobal.h"
 #include "taudioplayer.h"
 #include "tglobal.h"
+// Recheck if this test actually works
+#if defined( __linux__ ) || defined( __APPLE__ )
+#ifdef TUP_DEBUG
+#include "tdebug.h"
+#endif
+#endif
 
 #include <QDir>
 #include <QTimer>

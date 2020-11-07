@@ -13,6 +13,10 @@ set(LIB_VERSION_STRING ${LIB_VERSION_MAJOR}.${LIB_VERSION_MINOR}.${LIB_VERSION_P
 
 set(CMAKE_AUTOMOC ON)
 
+# flags
+set(CMAKE_C_FLAGS "-Wall -fdiagnostics-color=always ${CMAKE_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "-Wall -fdiagnostics-color=always ${CMAKE_CXX_FLAGS}")
+
 # Helpers
 #macro (create_test target)
 #  add_test (NAME ${target} COMMAND $<TARGET_FILE:${target}>)

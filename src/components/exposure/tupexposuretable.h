@@ -41,6 +41,7 @@
 
 #include <QTableWidget>
 #include <QPainter>
+#include <QPainterPath>
 #include <QItemDelegate>
 #include <QLineEdit>
 #include <QMouseEvent>
