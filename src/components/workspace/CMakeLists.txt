@@ -84,13 +84,14 @@ set(TUPIWORKSPACE_SOURCES
 ### temporary?
 set(SHELL_INCLUDE_DIR ../../shell)
 set(SELECTION_INCLUDE_DIR ../../plugins/tools/selection)
+set(POLYLINETOOL_INCLUDE_DIR ../../plugins/tools/polyline)
 ###
 
 add_library(tupiworkspace SHARED ${TUPIWORKSPACE_SOURCES})
 set_target_properties(tupiworkspace PROPERTIES VERSION ${LIB_VERSION_STRING}
                       SOVERSION ${LIB_VERSION_MAJOR}
                       INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(tupiworkspace PUBLIC ${SHELL_INCLUDE_DIR} ${SELECTION_INCLUDE_DIR})
+target_include_directories(tupiworkspace PUBLIC ${SHELL_INCLUDE_DIR} ${SELECTION_INCLUDE_DIR} ${POLYLINETOOL_INCLUDE_DIR})
 target_link_libraries(tupiworkspace tupifwcore tupifwgui tupi tupibase rastermain
    Qt5::Multimedia Qt5::MultimediaWidgets Qt5::PrintSupport)
 
