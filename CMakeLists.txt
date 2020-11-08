@@ -1,5 +1,4 @@
-#cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
 project(tupitube.desk)
 #set(VERSION_MAJOR 0)
