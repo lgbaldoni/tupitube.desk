@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+#cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 project(tupitube.desk)
 #set(VERSION_MAJOR 0)
@@ -16,19 +17,6 @@ set(CMAKE_AUTOMOC ON)
 # flags
 set(CMAKE_C_FLAGS "-Wall -fdiagnostics-color=always ${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "-Wall -fdiagnostics-color=always ${CMAKE_CXX_FLAGS}")
-
-# Helpers
-#macro (create_test target)
-#  add_test (NAME ${target} COMMAND $<TARGET_FILE:${target}>)
-#endmacro (create_test)
-
-# Define folders
-#set(EXT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ext)
-#set(INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/inc)
-#set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
-#set(TEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/test)
-#set(BIN_DIR ${CMAKE_CURRENT_BINARY_DIR}/bin)
-#set(LIB_DIR ${CMAKE_CURRENT_BINARY_DIR}/lib)
 
 # Compiler settings
 #set(CMAKE_CXX_STANDARD 11)

@@ -103,7 +103,7 @@ set(TUPISTORE_SOURCES
     tuprectitem.cpp
     tuppixmapitem.cpp
     tuptextitem.cpp
-    ###tupbuttonitem.cpp
+    tupbuttonitem.cpp
     tupellipseitem.cpp
     tuppaintareaevent.cpp
     tupserializer.cpp

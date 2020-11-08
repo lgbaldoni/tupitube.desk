@@ -2500,3 +2500,5 @@ void TupDocumentView::requestClearRasterCanvas()
                                                                      TupProjectRequest::ClearRasterCanvas, "");
     emit requestTriggered(&request);
 }
+
+#include "moc_tupdocumentview.cpp"

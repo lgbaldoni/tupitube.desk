@@ -343,3 +343,5 @@ void TupPaintAreaStatus::showPos(const QPointF &point)
     QString pos = "X: " +  QString::number(dot.x()) + " Y: " + QString::number(dot.y());
     showMessage(pos);
 }
+
+#include "moc_tuppaintareastatus.cpp"
