@@ -1,0 +1,2 @@
+file(GLOB DEFAULT_ICONS_FILES *.png)
+install(FILES ${DEFAULT_ICONS_FILES} DESTINATION ${TUPITUBE_SHARE}/themes/default/icons)

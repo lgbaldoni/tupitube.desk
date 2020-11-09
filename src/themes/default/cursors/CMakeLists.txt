@@ -1,0 +1,3 @@
+file(GLOB DEFAULT_CURSORS_FILES *.png)
+install(FILES ${DEFAULT_CURSORS_FILES} DESTINATION ${TUPITUBE_SHARE}/themes/default/cursors)
+

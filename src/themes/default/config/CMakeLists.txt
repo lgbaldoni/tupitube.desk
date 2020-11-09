@@ -1,0 +1,2 @@
+file(GLOB DEFAULT_CONFIG_FILES *.qss)
+install(FILES ${DEFAULT_CONFIG_FILES} DESTINATION ${TUPITUBE_SHARE}/themes/default/config)

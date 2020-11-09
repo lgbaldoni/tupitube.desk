@@ -1,0 +1,2 @@
+file(GLOB DEFAULT_IMAGES_FILES *.png)
+install(FILES ${DEFAULT_IMAGES_FILES} DESTINATION ${TUPITUBE_SHARE}/themes/default/images)

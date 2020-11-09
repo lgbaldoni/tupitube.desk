@@ -1,0 +1,2 @@
+file(GLOB DARK_CONFIG_FILES *.qss)
+install(FILES ${DARK_CONFIG_FILES} DESTINATION ${TUPITUBE_SHARE}/themes/dark/config)

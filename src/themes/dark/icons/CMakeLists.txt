@@ -1,0 +1,2 @@
+file(GLOB DARK_ICONS_FILES *.png)
+install(FILES ${DARK_ICONS_FILES} DESTINATION ${TUPITUBE_SHARE}/themes/dark/icons)
