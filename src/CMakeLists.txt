@@ -1,4 +1,4 @@
-#add_subdirectory(themes)
+add_subdirectory(themes)
 add_subdirectory(framework)
 add_subdirectory(libtupi)
 add_subdirectory(store)

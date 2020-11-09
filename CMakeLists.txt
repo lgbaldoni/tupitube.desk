@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+###cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
 
 project(tupitube.desk)
 # perhaps add program version  here?
@@ -96,5 +97,6 @@ find_package(THEORA)
 
 ### FIX THEORAPLUGIN!!! ###
 ### finish libui
+### see about configuring and installing .pc file
 
 add_subdirectory(src)

@@ -1,74 +1,3 @@
-#macx {
-#    CONFIG += console static
-#    ICON = ../../launcher/icons/tupitube.desk.icns
-#    QMAKE_INFO_PLIST = ./Info.plist
-#    QMAKE_LFLAGS += -Wl,-rpath,@loader_path/../,-rpath,@executable_path/../,-rpath,@executable_path/../Frameworks
-#    TARGET = ../../bin/TupiTube
-#
-#    INSTALLS += icons \
-#                target \
-#                tupidata \
-#                html
-#
-#    icons.target = ../../launcher/icons/tupitube.desk.png
-#    icons.commands = cp ../../launcher/icons/tupitube.desk.png $(INSTALL_ROOT)/pixmaps
-#    icons.path = /pixmaps/
-#
-#    target.path = /bin/
-#
-#    tupidata.target = data
-#    tupidata.commands = cp -r data/* $(INSTALL_ROOT)/data
-#    tupidata.path = /data/
-#
-#    html.target = html
-#    html.files = html
-#    html.commands = cp -r html $(INSTALL_ROOT)/share/tupitube/data
-#    html.path = /data/
-#}
-#
-#unix:!mac {
-#    INSTALLS += tupidata \
-#                launcher \
-#                mime \
-#                target \
-#                desktop \
-#                icons \
-#                html \
-#                copyright
-#
-#    tupidata.target = data
-#    tupidata.commands = cp -r data/* $(INSTALL_ROOT)/data
-#    tupidata.path = /data/
-#
-#    launcher.target = ../../launcher/tupitube.desk
-#    launcher.commands = cp ../../launcher/tupitube.desk $(INSTALL_ROOT)/bin; chmod 755 $(INSTALL_ROOT)/bin/tupitube.desk
-#    launcher.path = /bin/
-#
-#    mime.target = ../../launcher/tupitube.xml
-#    mime.commands = cp ../../launcher/tupitube.xml $(INSTALL_ROOT)/share/mime/packages
-#    mime.path = /share/mime/packages/
-#
-#    desktop.target = ../../launcher/tupitube.desktop
-#    desktop.commands = cp ../../launcher/tupitube.desktop $(INSTALL_ROOT)/applications
-#    desktop.path = /applications/
-#
-#    icons.target = ../../launcher/icons/tupitube.desk.png
-#    icons.commands = cp ../../launcher/icons/tupitube.desk.png $(INSTALL_ROOT)/pixmaps
-#    icons.path = /pixmaps/
-#
-#    html.target = html 
-#    html.files = html 
-#    html.commands = cp -r html $(INSTALL_ROOT)/share/tupitube/data
-#    html.path = /data/
-#
-#    copyright.target = man/copyright
-#    copyright.commands = cp man/copyright $(INSTALL_ROOT)/share/doc/tupitube
-#    copyright.path = /tupitube/
-#
-#    target.path = /bin/
-#    TARGET = ../../bin/tupitube.bin
-#}
-#
 set(SHELL_HEADERS
     tupsigndialog.h
     tupstatusbar.h
@@ -104,3 +33,18 @@ target_link_libraries(tupitube.desk tupifwgui tupistore tupiworkspace tupiplayer
    tupigui tupiexposure tupibrush tupicolorpalette tupiscenes tupilibrary
    tupitimeline tupitwitter tupinet tupimport)
 
+if(UNIX AND NOT APPLE)
+  install(DIRECTORY data DESTINATION ${TUPITUBE_SHARE})
+# install launcher here, but we'll have to configure it first
+  install(PROGRAMS ../../tools/linux/tupitube.desk DESTINATION ${CMAKE_INSTALL_BINDIR})
+  install(FILES ../../launcher/tupitube.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/mime/packages)
+# this has to be created first!
+#  install(FILES ../../launcher/tupitube.desktop ${CMAKE_INSTALL_DATADIR}/applications)
+# consider using the svg icon here
+  install(FILES ../../launcher/icons/tupitube.desk.png DESTINATION ${CMAKE_INSTALL_DATADIR}/pixmaps)
+  install(DIRECTORY html DESTINATION ${TUPITUBE_SHARE}/data)
+# might have to set a customizable license path
+  install(FILES man/copyright DESTINATION ${CMAKE_INSTALL_DATADIR}/doc/tupitube)
+# should this be called tupitube.bin instead?
+  install(TARGETS tupitube.desk DESTINATION ${CMAKE_INSTALL_BINDIR})
+endif()
