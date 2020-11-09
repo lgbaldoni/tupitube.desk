@@ -10,5 +10,3 @@ add_subdirectory(libui)
 add_subdirectory(components)
 add_subdirectory(plugins)
 add_subdirectory(shell)
-
-#CONFIG += ordered warn_on

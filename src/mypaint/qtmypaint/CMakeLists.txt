@@ -5,11 +5,12 @@
 #
 #TARGET = qtmypaint
 #
-#HEADERS += mpbrush.h \
-#           mptile.h \
-#           mpsurface.h \
-#           mphandler.h
-#
+
+set(QTMYPAINT_HEADERS
+    mpbrush.h
+    mptile.h
+    mpsurface.h
+    mphandler.h)
 
 set(QTMYPAINT_SOURCES
     mpbrush.cpp
@@ -23,46 +24,6 @@ set_target_properties(qtmypaint PROPERTIES VERSION ${LIB_VERSION_STRING}
                       INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qtmypaint tupifwcore mypaint)
 
-#FRAMEWORK_DIR = "../../framework"
-#include($$FRAMEWORK_DIR/framework.pri)
-#
-#LIBS += -L../json-c -ljson-c
-#LIBS += -L../libmypaint -llibmypaint
-#
-## --- json-c ---
-#win32:CONFIG(release, debug|release): LIBS += -L../json-c/release/ -ljson-c
-#else:win32:CONFIG(debug, debug|release): LIBS += -L../json-c/debug/ -ljson-c
-#else:unix: LIBS += -L../json-c -ljson-c
-#
-#INCLUDEPATH += ../json-c
-#DEPENDPATH += ../json-c
-#
-## --- libmypaint ---
-#win32:CONFIG(release, debug|release): LIBS += -L../libmypaint/release/ -llibmypaint
-#else:win32:CONFIG(debug, debug|release): LIBS += -L../libmypaint/debug/ -llibmypaint
-#else:unix: LIBS += -L../libmypaint -llibmypaint
-#
-#INCLUDEPATH += ../libmypaint
-#DEPENDPATH += ../libmypaint
-#
-#win32 {
-#    include(../../../win.pri)
-#}
-#
-#macx {
-#    INSTALLS += target
-#    target.path = /lib
-#
-#    !include(../../../tupiglobal.pri) {
-#        error("Run ./configure first!")
-#    }
-#}
-#
-#unix:!mac {
-#    INSTALLS += target
-#    target.path = /lib/raster
-#
-#    !include(../../../tupiglobal.pri) {
-#        error("Run ./configure first!")
-#    }
-#}   
+install(TARGETS qtmypaint LIBRARY DESTINATION ${TUPITUBE_RASTER})
+
+# what do we do with QTMYPAINT_HEADERS? install them somewhere?

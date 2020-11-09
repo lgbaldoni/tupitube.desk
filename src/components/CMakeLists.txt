@@ -1,5 +1,3 @@
-#CONFIG += ordered warn_on
-
 add_subdirectory(scenes)
 add_subdirectory(colorpalette)
 add_subdirectory(library)

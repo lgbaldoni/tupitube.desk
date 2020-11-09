@@ -1,71 +1,31 @@
-#
-#QT += xml network
-#
-#STORE_DIR = ../../src/store 
-#LIBTUPI_DIR = ../../src/libtupi 
-#LIBBASE_DIR = ../../src/libbase
-#
-#include($$STORE_DIR/store.pri)
-#include($$LIBTUPI_DIR/libtupi.pri)
-#include($$LIBBASE_DIR/libbase.pri)
-#QT += opengl core gui svg xml network
-#TEMPLATE = lib
-#TARGET = tupinet
-#
-#macx {
-#    CONFIG += plugin warn_on
-#} else {
-#    CONFIG += dll warn_on
-#}
-#
-#unix {
-#    !include(../../tupiglobal.pri) {
-#        error("Please configure first")
-#    }
-#}
-#
-#win32 {
-#    include(../../win.pri)
-#}
-#
-#INSTALLS += target
-#target.path = /lib/
-#
-#contains("DEFINES", "ADD_HEADERS") {
-#    INSTALLS += headers
-#    headers.target = .
-#    headers.commands = cp *.h $(INSTALL_ROOT)/include/tupinet
-#    headers.path = /include/tupinet/
-#}
-#
-#HEADERS += tupnetprojectmanagerparams.h \
-#           tupnetprojectmanagerhandler.h \
-#           tupnetsocket.h \
-#           tupconnectpackage.h \
-#           tuplistpackage.h \
-#           tupopenpackage.h \
-#           tupsavepackage.h \
-#           tupnewprojectpackage.h \
-#           tupnetfilemanager.h \
-#           tupchat.h \
-#           tupconnectdialog.h \
-#           tupprojectparser.h \
-#           tuplistprojectspackage.h \
-#           tupprojectlistparser.h \
-#           tuplistprojectdialog.h \
-#           tupnotificationparser.h \
-#           tupackparser.h \
-#           tupimportprojectpackage.h \
-#           tupchatpackage.h \
-#           tupnotice.h \
-#           # tupnoticepackage.h \
-#           tupcommunicationparser.h \
-#           tupimageexportpackage.h \
-#           tupvideoexportpackage.h \
-#           tupstoryboardupdatepackage.h \
-#           tupstoryboardexportpackage.h \
-#           tupstoryboardparser.h
-#
+set(TUPINET_HEADERS
+    tupnetprojectmanagerparams.h
+    tupnetprojectmanagerhandler.h
+    tupnetsocket.h
+    tupconnectpackage.h
+    tuplistpackage.h
+    tupopenpackage.h
+    tupsavepackage.h
+    tupnewprojectpackage.h
+    tupnetfilemanager.h
+    tupchat.h
+    tupconnectdialog.h
+    tupprojectparser.h
+    tuplistprojectspackage.h
+    tupprojectlistparser.h
+    tuplistprojectdialog.h
+    tupnotificationparser.h
+    tupackparser.h
+    tupimportprojectpackage.h
+    tupchatpackage.h
+    tupnotice.h
+    # tupnoticepackage.h
+    tupcommunicationparser.h
+    tupimageexportpackage.h
+    tupvideoexportpackage.h
+    tupstoryboardupdatepackage.h
+    tupstoryboardexportpackage.h
+    tupstoryboardparser.h)
 
 set(TUPINET_SOURCES
     tupnetprojectmanagerparams.cpp
@@ -102,9 +62,8 @@ set_target_properties(tupinet PROPERTIES VERSION ${LIB_VERSION_STRING}
                       INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(tupinet tupifwcore tupistore)
 
-#
-#include(net_config.pri)
-#
-#FRAMEWORK_DIR = "../framework"
-#include($$FRAMEWORK_DIR/framework.pri)
-#
+install(TARGETS tupinet LIBRARY DESTINATION ${TUPITUBE_TUPILIB})
+
+if(ADD_HEADERS)
+  install(FILES ${TUPINET_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tupinet)
+endif()

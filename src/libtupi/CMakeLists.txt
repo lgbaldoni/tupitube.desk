@@ -1,67 +1,26 @@
-#unix {
-#    INCLUDEPATH += $$LIBTUPI_DIR
-#    LIBS += -L$$LIBTUPI_DIR -ltupi 
-#}
-#
-#win32 {
-#    INCLUDEPATH += $$LIBTUPI_DIR
-#    LIBS += -L$$LIBTUPI_DIR/release/ -ltupi 
-
-
-#}#QT += opengl core gui svg xml network
-#TEMPLATE = lib
-#TARGET = tupi
-#
-#macx {
-#    CONFIG += plugin warn_on
-#} else {
-#    CONFIG += dll warn_on
-#}
-#
-#unix {
-#    !include(../../tupiglobal.pri) {
-#        error("Please configure first")
-#    }
-#}
-#
-#win32 {
-#    include(../../quazip.win.pri)
-#    include(../../win.pri)
-#}
-#
-#INSTALLS += target 
-#target.path = /lib/
-#
-#contains("DEFINES", "ADD_HEADERS") {
-#    INSTALLS += headers
-#    headers.target = .
-#    headers.commands = cp *.h $(INSTALL_ROOT)/include/tupi
-#    headers.path = /include/tupi
-#}
-#
-#HEADERS += tupgraphicalgorithm.h \
-#           # tupglobal.h \
-#           tuppaintareaproperties.h \
-#           tupgradientcreator.h \
-#           tupgradientselector.h \
-#           tupgradientviewer.h \
-#           tuppackagehandler.h \
-#           tupprojectactionbar.h \
-#           tupbrushmanager.h \
-#           tupinputdeviceinformation.h \
-#           tupsvg2qt.h \
-#           tupitempreview.h \
-#           tupcompress.h  \
-#           tupsocketbase.h \
-#           tupxmlparserbase.h \
-#           tupproxyitem.h \
-#           # tupinthash.h \
-#           tuppenthicknesswidget.h \
-#           tupbrushstatus.h \
-#           tuptoolstatus.h \ 
-#           tupcolorwidget.h \
-#           tuppaintareastatus.h
-#
+set(TUPI_HEADERS
+    tupgraphicalgorithm.h
+    # tupglobal.h
+    tuppaintareaproperties.h
+    tupgradientcreator.h
+    tupgradientselector.h
+    tupgradientviewer.h
+    tuppackagehandler.h
+    tupprojectactionbar.h
+    tupbrushmanager.h
+    tupinputdeviceinformation.h
+    tupsvg2qt.h
+    tupitempreview.h
+    tupcompress.h
+    tupsocketbase.h
+    tupxmlparserbase.h
+    tupproxyitem.h
+    # tupinthash.h
+    tuppenthicknesswidget.h
+    tupbrushstatus.h
+    tuptoolstatus.h
+    tupcolorwidget.h
+    tuppaintareastatus.h)
 
 set(TUPI_SOURCES
     tupgraphicalgorithm.cpp
@@ -89,7 +48,10 @@ add_library(tupi SHARED ${TUPI_SOURCES})
 set_target_properties(tupi PROPERTIES VERSION ${LIB_VERSION_STRING}
                       SOVERSION ${LIB_VERSION_MAJOR}
                       INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(tupi tupifwcore tupifwgui Qt5::Network Qt5::Svg QuaZip::QuaZip)
+target_link_libraries(tupi tupifwcore tupifwgui Qt::Network Qt::Svg QuaZip::QuaZip)
 
-#FRAMEWORK_DIR = "../framework"
-#include($$FRAMEWORK_DIR/framework.pri)
+install(TARGETS tupi LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+if(ADD_HEADERS)
+  install(FILES ${TUPI_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tupi)
+endif()

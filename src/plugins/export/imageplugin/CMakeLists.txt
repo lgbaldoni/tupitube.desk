@@ -1,26 +1,5 @@
-#INCLUDEPATH += $$PLUGIN_DIR
-#LIBS += -L$$PLUGIN_DIR -ltupiimageplugin
-
-#QT += opengl core gui svg xml network
-#CONFIG += plugin warn_on
-#TEMPLATE = lib
-#TARGET = tupiimageplugin
-#
-#unix {
-#    !include(../../../../tupiglobal.pri){
-#        error("Please run configure first")
-#    }
-#}
-#
-#win32 {
-#    include(../../../../win.pri)
-#}
-#
-#INSTALLS += target 
-#target.path = /plugins/ 
-#
-#HEADERS += imageplugin.h
-#SOURCES += imageplugin.cpp
+set(TUPIIMAGEPLUGIN_HEADERS
+    imageplugin.h)
 
 set(TUPIIMAGEPLUGIN_SOURCES
     imageplugin.cpp)
@@ -28,14 +7,6 @@ set(TUPIIMAGEPLUGIN_SOURCES
 add_library(tupiimageplugin MODULE ${TUPIIMAGEPLUGIN_SOURCES})
 target_link_libraries(tupiimageplugin tupifwcore tupibase)
 
-#
-#FRAMEWORK_DIR = "../../../framework"
-#include($$FRAMEWORK_DIR/framework.pri)
-#
-#LIBBASE_DIR = ../../../libbase
-#STORE_DIR = ../../../store
-#LIBTUPI_DIR = ../../../libtupi
-#
-#include($$LIBBASE_DIR/libbase.pri)
-#include($$STORE_DIR/store.pri)
-#include($$LIBTUPI_DIR/libtupi.pri)
+install(TARGETS tupiimageplugin DESTINATION ${TUPITUBE_PLUGIN})
+
+# what do we do with TUPIIMAGEPLUGIN_HEADERS ?

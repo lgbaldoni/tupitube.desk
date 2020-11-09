@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
 project(tupitube.desk)
-#set(VERSION_MAJOR 0)
-#set(VERSION_MINOR 0)
-#set(VERSION_PATCH 1)
+# perhaps add program version  here?
 
 # I couldn't find this declared anywhere, but that's how it's built with qmake
 set(LIB_VERSION_MAJOR 1)
@@ -17,16 +15,39 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_C_FLAGS "-Wall -fdiagnostics-color=always ${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "-Wall -fdiagnostics-color=always ${CMAKE_CXX_FLAGS}")
 
-# Compiler settings
-#set(CMAKE_CXX_STANDARD 11)
-#set(warnings "-Wall -Wextra -Werror")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${warnings}")
+# INDENT EVERY OTHER CONDITIONAL!
 
-# Output
-#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LIB_DIR})
-#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
-#set(CMAKE_LEGACY_CYGWIN_WIN32 0)
+# see what to do about Windows and Apple, not to mention BSD
+if(UNIX AND NOT APPLE)
+  include(GNUInstallDirs)
+endif()
+
+# we need to review install dirs for windows and mac
+
+if(NOT DEFINED CMAKE_INSTALL_BINDIR)
+  set(CMAKE_INSTALL_BINDIR bin)
+endif()
+
+if(NOT DEFINED CMAKE_INSTALL_DATADIR)
+  set(CMAKE_INSTALL_DATADIR share)
+endif()
+
+if(NOT DEFINED CMAKE_INSTALL_LIBDIR)
+  set(CMAKE_INSTALL_LIBDIR lib)
+endif()
+
+if(NOT DEFINED CMAKE_INSTALL_INCLUDEDIR)
+  set(CMAKE_INSTALL_INCLUDEDIR include)
+endif()
+
+set(TUPITUBE_HOME ${CMAKE_INSTALL_PREFIX})
+set(TUPITUBE_SHARE ${CMAKE_INSTALL_DATADIR}/tupitube)
+### perhaps this is unix-only? recheck
+set(TUPITUBE_TUPILIB ${CMAKE_INSTALL_LIBDIR}/tupitube)
+set(TUPITUBE_BIN ${TUPITUBE_TUPILIB}/bin)
+set(TUPITUBE_PLUGIN ${TUPITUBE_TUPILIB}/plugins)
+set(TUPITUBE_RASTER ${TUPITUBE_TUPILIB}/raster)
+set(TUPITUBE_LIB ${TUPITUBE_TUPILIB};${TUPITUBE_RASTER})
 
 # https://github.com/snikulov/cmake-modules/blob/master/FindFFmpeg.cmake
 # https://github.com/Eyescale/CMake/blob/master/FindFFMPEG.cmake
@@ -56,7 +77,7 @@ add_definitions(-DTUPITUBE_VERSION="0.2" -DCODE_NAME="Gambá" -DREVISION="16" -D
 find_package(Qt5 COMPONENTS Core Gui Multimedia MultimediaWidgets Network
   OpenGL PrintSupport Svg Widgets Xml REQUIRED)
 
-# QuaZip: will have to find a wya to search for this under multipla names (quazip5, quazip)
+# QuaZip: will have to find a wya to search for this under multiple names (quazip5, quazip)
 # and possibly with a pkgconfig fallback and yet something else for Windows or OSX.
 # Also see find_library()
 find_package(QUAZIP NAMES QuaZip-Qt5 REQUIRED)
@@ -70,5 +91,10 @@ find_package(FFmpeg COMPONENTS AVCODEC AVFORMAT AVUTIL)
 # Theora and ogg
 find_package(THEORA)
 # this defines THEORA_FOUND, see about HAVE_THEORA
+
+### see about locales too
+
+### FIX THEORAPLUGIN!!! ###
+### finish libui
 
 add_subdirectory(src)
