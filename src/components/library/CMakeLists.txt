@@ -20,7 +20,7 @@ add_library(tupilibrary SHARED ${TUPILIBRARY_SOURCES})
 set_target_properties(tupilibrary PROPERTIES VERSION ${LIB_VERSION_STRING}
                       SOVERSION ${LIB_VERSION_MAJOR}
                       INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(tupilibrary tupifwcore tupifwgui tupi tupibase Qt5::Multimedia)
+target_link_libraries(tupilibrary tupifwcore tupifwgui tupi tupibase Qt::Multimedia)
 
 install(TARGETS tupilibrary LIBRARY DESTINATION ${TUPITUBE_TUPILIB})
 

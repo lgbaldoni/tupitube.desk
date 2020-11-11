@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
-###cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
 
 project(tupitube.desk)
-# perhaps add program version  here?
+# Perhaps add program version here?
 
 # I couldn't find this declared anywhere, but that's how it's built with qmake
 set(LIB_VERSION_MAJOR 1)
@@ -16,15 +15,15 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_C_FLAGS "-Wall -fdiagnostics-color=always ${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "-Wall -fdiagnostics-color=always ${CMAKE_CXX_FLAGS}")
 
-# INDENT EVERY OTHER CONDITIONAL!
-
 # see what to do about Windows and Apple, not to mention BSD
 if(UNIX AND NOT APPLE)
   include(GNUInstallDirs)
 endif()
 
 # we need to review install dirs for windows and mac
+# and the launcher has something target-specific too
 
+# unsure if all of this stuff is actually required
 if(NOT DEFINED CMAKE_INSTALL_BINDIR)
   set(CMAKE_INSTALL_BINDIR bin)
 endif()
@@ -42,13 +41,19 @@ if(NOT DEFINED CMAKE_INSTALL_INCLUDEDIR)
 endif()
 
 set(TUPITUBE_HOME ${CMAKE_INSTALL_PREFIX})
-set(TUPITUBE_SHARE ${CMAKE_INSTALL_DATADIR}/tupitube)
+set(TUPITUBE_SHARE ${TUPITUBE_HOME}/${CMAKE_INSTALL_DATADIR}/tupitube)
 ### perhaps this is unix-only? recheck
-set(TUPITUBE_TUPILIB ${CMAKE_INSTALL_LIBDIR}/tupitube)
+set(TUPITUBE_TUPILIB ${TUPITUBE_HOME}/${CMAKE_INSTALL_LIBDIR}/tupitube)
 set(TUPITUBE_BIN ${TUPITUBE_TUPILIB}/bin)
 set(TUPITUBE_PLUGIN ${TUPITUBE_TUPILIB}/plugins)
 set(TUPITUBE_RASTER ${TUPITUBE_TUPILIB}/raster)
 set(TUPITUBE_LIB ${TUPITUBE_TUPILIB};${TUPITUBE_RASTER})
+
+# make these configurable ?
+# the originals were launcher_bindir + "/tupitube.desk %f"
+# and tupitube.desk, respectively
+set(TUPITUBE_EXEC tupitube.desk)
+set(TUPITUBE_ICON tupitube.desk)
 
 # https://github.com/snikulov/cmake-modules/blob/master/FindFFmpeg.cmake
 # https://github.com/Eyescale/CMake/blob/master/FindFFMPEG.cmake
@@ -66,22 +71,23 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/)
 # HAVE_ZLIB HAVE_MULTIMEDIA HAVE_QUAZIP HAVE_FFMPEG
 
 # Debug is on by default
+# Also see about TUP_NODEBUG
 if(NOT ${DISABLE_DEBUG})
-add_definitions(-DTUP_DEBUG)
+  add_definitions(-DTUP_DEBUG)
 endif()
 
 add_definitions(-DTUPITUBE_VERSION="0.2" -DCODE_NAME="Gambá" -DREVISION="16" -DCONFIG_VERSION="3")
 
-### search for libs here; also see if it's proper to link to Qt::Module instead of Qt5::Module
 # I would also add zlib, quazip and ffmpeg
+
 # Qt
 find_package(Qt5 COMPONENTS Core Gui Multimedia MultimediaWidgets Network
   OpenGL PrintSupport Svg Widgets Xml REQUIRED)
 
-# QuaZip: will have to find a wya to search for this under multiple names (quazip5, quazip)
+# QuaZip: will have to find a way to search for this under multiple names (quazip5, quazip)
 # and possibly with a pkgconfig fallback and yet something else for Windows or OSX.
 # Also see find_library()
-find_package(QUAZIP NAMES QuaZip-Qt5 REQUIRED)
+find_package(QUAZIP NAMES QuaZip-Qt5 quazip5 quazip REQUIRED)
 # maybe set HAVE_QUAZIP here? Although nothing appears to be using it
 
 # json-c might have to be added optionally
@@ -98,5 +104,9 @@ find_package(THEORA)
 ### FIX THEORAPLUGIN!!! ###
 ### finish libui
 ### see about configuring and installing .pc file
+### some libraries are installed in LIBDIR/tupitube, other straight into LIBDIR,
+### ask upstream about it
+### also ask upstream about theora and apng plugins which do not build properly
+### and check for any other variable that might be set by the .rb scripts
 
 add_subdirectory(src)

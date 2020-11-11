@@ -54,19 +54,19 @@ set(TUPIWORKSPACE_SOURCES
     tupmodessettingsdialog.cpp
     tupmodeslist.cpp)
 
-### temporary?
-set(SHELL_INCLUDE_DIR ../../shell)
-set(SELECTION_INCLUDE_DIR ../../plugins/tools/selection)
-set(POLYLINETOOL_INCLUDE_DIR ../../plugins/tools/polyline)
-###
+# unclean, see if anything can be done about it
+set(SHELL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/src/shell)
+set(SELECTION_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/src/plugins/tools/selection)
+set(POLYLINETOOL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/src/plugins/tools/polyline)
 
 add_library(tupiworkspace SHARED ${TUPIWORKSPACE_SOURCES})
 set_target_properties(tupiworkspace PROPERTIES VERSION ${LIB_VERSION_STRING}
                       SOVERSION ${LIB_VERSION_MAJOR}
                       INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(tupiworkspace PUBLIC ${SHELL_INCLUDE_DIR} ${SELECTION_INCLUDE_DIR} ${POLYLINETOOL_INCLUDE_DIR})
+target_include_directories(tupiworkspace PUBLIC ${SHELL_INCLUDE_DIR}
+  ${SELECTION_INCLUDE_DIR} ${POLYLINETOOL_INCLUDE_DIR})
 target_link_libraries(tupiworkspace tupifwcore tupifwgui tupi tupibase rastermain
-   Qt::Multimedia Qt::MultimediaWidgets Qt::PrintSupport)
+  Qt::Multimedia Qt::MultimediaWidgets Qt::PrintSupport)
 
 install(TARGETS tupiworkspace LIBRARY DESTINATION ${TUPITUBE_TUPILIB})
 

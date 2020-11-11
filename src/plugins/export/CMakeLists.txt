@@ -9,7 +9,7 @@ add_subdirectory(imageplugin)
 
 # don't forget to add the checks in the top CMakeLists.txt
 if(FFMPEG_FOUND)
-add_subdirectory(ffmpegplugin)
+  add_subdirectory(ffmpegplugin)
 endif()
 
 #
@@ -21,7 +21,7 @@ endif()
 
 # if linux
 if(THEORA_FOUND)
-add_subdirectory(theoraplugin)
+###  add_subdirectory(theoraplugin)
 endif()
 
 # Experimental code
