@@ -1,13 +1,9 @@
 add_subdirectory(imageplugin)
-## SMIL plugin will be disabled temporary 
+## SMIL plugin will be disabled temporary
 #add_subdirectory(# smileplugin)
 
-#
-#contains(DEFINES, HAVE_FFMPEG) {
-#        SUBDIRS += ffmpegplugin 
-#}
-
 # don't forget to add the checks in the top CMakeLists.txt
+# should be if(HAVE_FFMPEG) to match the original
 if(FFMPEG_FOUND)
   add_subdirectory(ffmpegplugin)
 endif()
@@ -20,6 +16,7 @@ endif()
 ## }
 
 # if linux
+# should be if(HAVE_THEORA) to match the original
 if(THEORA_FOUND)
 ###  add_subdirectory(theoraplugin)
 endif()

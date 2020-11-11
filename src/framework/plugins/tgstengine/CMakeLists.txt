@@ -1,26 +1,8 @@
-#CONFIG += warn_on plugin
-#TEMPLATE = lib
-#TARGET = tgstengine
-#
-#!include(../../tupconfig.pri){
-#    error("Please configure first")
-#}
-#
-#INSTALLS += target 
-#target.path = /lib/plugins/ 
-#
-#INCLUDEPATH += ../../ ../../core
-#LIBS += -L../../core -ltupifwcore
-#
-#contains(DEFINES, HAVE_GST10){
-#    HEADERS += tgstengine.h 
-#    SOURCES += tgstengine.cpp 
-#}
-#
+# are we sure about the name? Shouldn't it be prepended with "tupi"?
+set(TGSTENGINE_HEADERS tgstengine.h)
 set(TGSTENGINE_SOURCES tgstengine.cpp)
 
-add_library(tgstengine SHARED ${TGSTENGINE_SOURCES})
+add_library(tgstengine MODULE ${TGSTENGINE_SOURCES})
+#target_link_libraries(tgstengine tupifwcore tupibase)
 
-#linux-g{
-#    TARGETDEPS += ../../core/libtupifwcore.so
-#}
+install(TARGETS tgstengine DESTINATION ${TUPITUBE_PLUGIN})
